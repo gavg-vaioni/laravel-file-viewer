@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Storage;
 
 class LaravelFileViewer
 {
-    public function show(String $filename,String $filePath,String $file_url,$file_data=[])
+    public function show(String $filename,String $filePath,String $file_url,String $disk='default',$file_data=[])
     {
-      if (!Storage::exists($filePath)) {
+      if (!Storage::disk($disk)->exists($filePath)) {
         abort(404,__("file_not_found_or_deleted"));
       }
       $type = Storage::mimeType($filePath);
